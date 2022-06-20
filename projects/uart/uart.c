@@ -26,7 +26,10 @@
 *************************************************/
 int main(void);
 
-volatile uint8_t msg[] = "https://furkan.space/\n";
+const uint8_t msg[] = "bb";
+
+#define VECT_TAB_BASE_ADDRESS 0x08000000
+#define VECT_TAB_OFFSET       0x00020200
 
 /*************************************************
 * main code starts from here
@@ -35,6 +38,8 @@ int main(void)
 {
     /* set system clock to 168 Mhz */
     set_sysclk_to_168();
+
+    //SCB->VTOR = VECT_TAB_BASE_ADDRESS | VECT_TAB_OFFSET;
 
     // enable USART2 clock, bit 17 on APB1ENR
     RCC->APB1ENR |= (1 << 17);

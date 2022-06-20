@@ -15,6 +15,8 @@ uint32_t SystemCoreClock = HSI_VALUE;
 *************************************************/
 void SystemInit(void)
 {
+	SCB->VTOR = 0x08020200;
+
 	/* FPU settings, can be enabled from project makefile */
 	#if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
 	SCB->CPACR |= ((3UL << 10*2)|(3UL << 11*2));  /* set CP10 and CP11 Full Access */
@@ -38,6 +40,8 @@ void SystemInit(void)
 
 	/* Disable all clock interrupts */
 	RCC->CIR = 0x00000000UL;
+
+	//SCB->VTOR = 0x08020200;
 }
 
 
@@ -99,4 +103,6 @@ void set_sysclk_to_168(void)
 
 	// update SystemCoreClock variable
 	SystemCoreClock = 168000000;
+
+//	SCB->VTOR = 0x08020200;
 }
